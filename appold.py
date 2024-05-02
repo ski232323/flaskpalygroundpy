@@ -1,6 +1,6 @@
-from flask import Flask
+from flask import Flask, url_for
 
-app = Flask(__name__)
+app: Flask = Flask(__name__)
 
 
 @app.route("/")
