@@ -2,11 +2,88 @@
 <html>
 <head>
   <title>A Meaningful Page Title</title>
+  <style>
+  body {
+  background-color: #CCFFE5 ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.clock {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 10px solid #3498db;
+}
+
+.hour, .minute, .second {
+  position: absolute;
+  background-color: #3498db;
+  border-radius: 50%;
+}
+
+.hour {
+  width: 6px;
+  height: 50px;
+  top: 50px;
+  left: 97px;
+  transform-origin: 50% 100%;
+}
+
+.minute {
+  width: 4px;
+  height: 70px;
+  top: 30px;
+  left: 98px;
+  transform-origin: 50% 100%;
+}
+
+.second {
+  width: 2px;
+  height: 90px;
+  top: 10px;
+  left: 99px;
+  transform-origin: 50% 100%;
+}
+
+</style>
 </head>
 <body>
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+<div id="clock"></div>
+<script>
+function updateClock() {
+  const now = new Date();
+  const hour = now.getHours() % 12;
+  const minute = now.getMinutes();
+  const second = now.getSeconds();
 
-The content of the document......
+  const hourHand = document.getElementById('hour');
+  const minuteHand = document.getElementById('minute');
+  const secondHand = document.getElementById('second');
 
+  hourHand.style.transform = `rotate(${(hour * 30) + (minute / 2)}deg)`;
+  minuteHand.style.transform = `rotate(${(minute * 6) + (second / 10)}deg)`;
+  secondHand.style.transform = `rotate(${second * 6}deg)`;
+}
+
+setInterval(updateClock, 1000);
+
+</script>
+
+<h1>Your ip is {{ip}}</h1>
+<h2> Created by Ulysse Renzetti</h2>
+
+
+
+<div class="clock">
+    <div id="hour" class="hour"></div>
+    <div id="minute" class="minute"></div>
+    <div id="second" class="second"></div>
+  </div>
 </body>
 </html>
